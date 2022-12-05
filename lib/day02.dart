@@ -37,7 +37,7 @@ class Day2 {
 
     if (outcome == 'Y') {
       matchScore = 3;
-      myChoice = them;
+      myChoice = String.fromCharCode(them.codeUnitAt(0) + 23);
     }
     if (outcome == 'X') {
       //lose
