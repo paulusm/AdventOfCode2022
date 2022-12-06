@@ -17,7 +17,7 @@ class Day1 {
   Future<int> loadCals() async {
     Elf currentElf = Elf([]);
 
-    List<String> contents = await File('data/cals.txt').readAsLines();
+    List<String> contents = await File('data/1-cals.txt').readAsLines();
 
     contents.forEach((element) {
       if (element == '' || _elfList.isEmpty) {

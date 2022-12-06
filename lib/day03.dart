@@ -35,6 +35,6 @@ class Day3 {
   }
 
   Future<List<String>> openSacks() async {
-    return (await File('data/rucksack.txt').readAsLines());
+    return (await File('data/3-rucksack.txt').readAsLines());
   }
 }

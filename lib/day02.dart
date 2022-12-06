@@ -9,7 +9,7 @@ class Day2 {
 
   Future<List<int>> readRPS() async {
     List<int> lstRet = [0, 0];
-    List<String> contents = await File('data/rps.txt').readAsLines();
+    List<String> contents = await File('data/2-rps.txt').readAsLines();
     contents.forEach((element) {
       List<String> moves = element.split(' ');
       lstRet[0] += getPt1Scores(moves[0], moves[1]);
