@@ -20,17 +20,19 @@ class Day4 {
             (firstList[0] <= secondList[0] && firstList[1] >= secondList[1])) {
           contained += 1;
         }
+        //9-70,5-10 0 > 0; 1 > 1 but 0 < 1
+
         if ((firstList[0] < secondList[0] &&
-                firstList[1] >= secondList[0] &&
-                firstList[1] <= secondList[1]) ||
+                firstList[1] < secondList[1] &&
+                firstList[1] >= secondList[0]) ||
             (firstList[1] > secondList[1] &&
-                firstList[0] >= secondList[0] &&
-                firstList[0] <= secondList[1])) {
+                firstList[0] > secondList[0] &&
+                firstList[1] <= secondList[0])) {
           overlapped += 1;
         }
       }
       print('$contained wholly contained sequences');
-      print('${overlapped + contained} contained OR overlapped sequences');
+      print('${overlapped + contained} overlapped sequences');
     });
   }
 
