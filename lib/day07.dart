@@ -58,8 +58,28 @@ class Day7 {
         }
       }
       HashMap<String, int> sizes = getDirSize(fileTree);
-      print(sizes.toString());
-      //printTree(fileTree);
+      int finalFlippingResult = 0;
+      for (int size in sizes.values) {
+        //print(size);
+        if (size <= 100000) {
+          finalFlippingResult += size;
+        }
+      }
+      print('Combined dir size < 100000 = $finalFlippingResult');
+
+      int ds = 70000000;
+      int du = 40913445;
+      int df = ds - du;
+      int dn = 30000000 - df;
+      int bestSize = dn + 100000;
+
+      for (int size in sizes.values) {
+        int dd = size - dn;
+        if (size > dn && dd < (bestSize - dn)) {
+          bestSize = size;
+        }
+      }
+      print('Best folder to blat is $bestSize as we need to free up $dn');
     });
   }
 
@@ -80,28 +100,32 @@ class Day7 {
     int dirSize = 0;
     HashMap<String, int> hRet = HashMap();
 
-    startDir.forEachDepthFirst((node) {
-      if (node.value.id != startDir.value.id) {
-        if (node.value.runtimeType.toString() == 'AdDir') {
-          //print(node.value.name);
-          if (!hRet.containsKey(node.value.id + '-' + node.value.name)) {
-            HashMap<String, int> subFolder = getDirSize(node);
-            hRet.addEntries(subFolder.entries);
-            for (String keyName in subFolder.keys) {
-              dirSize += subFolder[keyName] as int;
-            }
-          }
-        } else {
-          dirSize += node.value.fsize as int;
-        }
+    startDir.forEachLevelOrder((node) {
+      if (node.value.runtimeType.toString() == 'AdFile') {
+        dirSize += node.value.fsize as int;
       }
     });
 
     hRet[startDir.value.id + '-' + startDir.value.name] = dirSize;
+
+    startDir.forEachLevelOrder((node) {
+      if (!hRet.containsKey(node.value.id + '-' + node.value.name) &&
+          node.value.id != startDir.value.id) {
+        if (node.value.runtimeType.toString() == 'AdDir') {
+          //print(node.value.id + '-' + node.value.name);
+          HashMap<String, int> subFolder = getDirSize(node);
+          hRet.addEntries(subFolder.entries);
+          for (String keyName in subFolder.keys) {
+            dirSize += subFolder[keyName] as int;
+          }
+        }
+      }
+    });
+
     return hRet;
   }
 
   Future<List<String>> readData() async {
-    return (await File('data/7-bash-test.txt').readAsLines());
+    return (await File('data/7-bash.txt').readAsLines());
   }
 }
