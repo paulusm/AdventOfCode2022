@@ -134,6 +134,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.12.13"
+  matrices:
+    dependency: "direct main"
+    description:
+      name: matrices
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.9"
   meta:
     dependency: transitive
     description:
