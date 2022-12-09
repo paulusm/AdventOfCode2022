@@ -4,10 +4,12 @@ import 'package:matrices/matrices.dart';
 
 class Day8 {
   Matrix grid = Matrix();
+  int scenicScore = 0;
 
   Day8() {
     readData().then((data) {
       List<List<double>> dataList = [];
+
       for (String line in data) {
         List<String> oneStringRow = line.split('');
         List<double> oneRow = [];
@@ -26,20 +28,22 @@ class Day8 {
         }
       }
       print('Visble trees = $numVisible');
+      print('Max Scenic Score = $scenicScore');
     });
   }
 
   int checkVisible(x, y) {
-    List<bool> compass = [false, false, false, false];
+    List<bool> compass = [true, true, true, true];
     if (x == 0 ||
         y == 0 ||
         x == grid.matrix.length - 1 ||
         y == grid.matrix.length - 1) {
-      print('perimeter');
+      //print('perimeter');
       return 1;
     }
 
     int cardCounter = 0;
+    List<int> scenicScores = [0, 0, 0, 0];
 
     for (List cardinal in [
       [1, 0],
@@ -57,6 +61,8 @@ class Day8 {
         a += cardinal[0] as int;
         b += cardinal[1] as int;
 
+        scenicScores[cardCounter] += 1;
+
         if (grid.matrix[a][b] >= grid.matrix[x][y]) {
           compass[cardCounter] = false;
           break;
@@ -64,18 +70,24 @@ class Day8 {
       }
       cardCounter++;
     }
-    print(compass);
+
+    int treeScenicScore =
+        scenicScores[0] * scenicScores[1] * scenicScores[2] * scenicScores[3];
+    if (treeScenicScore > scenicScore) {
+      scenicScore = treeScenicScore;
+    }
+    //print(compass);
     if (compass.join() == [false, false, false, false].join()) {
-      print('invis');
+      //print('invis');
       return 0;
     } else {
       //tree is viz
-      print('gotcha!');
+      //print('gotcha!');
       return 1;
     }
   }
 
   Future<List<String>> readData() async {
-    return (await File('data/8-trees-test.txt').readAsLines());
+    return (await File('data/8-trees.txt').readAsLines());
   }
 }
