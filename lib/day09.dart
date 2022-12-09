@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:matrices/matrices.dart';
 
 class Day9 {
-  final int gridSize = 30;
+  final int gridSize = 6;
   Matrix grid = Matrix();
   String lastMovePlane = 'horizontal';
   List<int> lastHeadPos = [0, 0];
@@ -35,8 +35,13 @@ class Day9 {
         }
 
         tailPos = moveTail(headPos, tailPos);
-        //print('head at $headPos, tail at $tailPos');
       }
+
+      double totalMoves = 0;
+      grid.matrix.forEach((gridRow) {
+        totalMoves += gridRow.reduce((value, element) => value + element);
+      });
+      print('Total moves - $totalMoves');
       print(grid);
     });
   }
@@ -46,23 +51,37 @@ class Day9 {
       lstHeadPos[0] - lastHeadPos[0],
       lstHeadPos[1] - lastHeadPos[1]
     ];
+    List<int> lstNewTailPos = lstTailPos;
     print('from $lastHeadPos');
     print('to $lstHeadPos');
     print('Differential $difPos');
 
     String currentMovePlane = (difPos[0] != 0 ? 'horizontal' : 'vertical');
 
-    print('plane change? ${currentMovePlane != lastMovePlane}');
+    bool planeChange = currentMovePlane != lastMovePlane;
 
-    List<int> lstNewTailPos = [
-      lstTailPos[0] + (difPos[0] == 0 ? 0 : lstTailPos[0] + difPos[0] - 1),
-      lstTailPos[1] + (difPos[1] == 0 ? 0 : lstTailPos[1] + difPos[1] - 1)
-    ];
+    // Make a trail
+    for (int i in Iterable.generate(difPos[0].abs())) {
+      print('move x - $i');
+      int j = (difPos[0] < 0 ? i * -1 : i);
+      grid.matrix[lstTailPos[0] + j][lstTailPos[1]] = 1;
+      lstNewTailPos = [
+        lstTailPos[0] + (i == 1 && planeChange ? 0 : j),
+        (i > 1 ? lstHeadPos[1] : lstTailPos[1])
+      ];
+    }
+
+    for (int i in Iterable.generate(difPos[1].abs())) {
+      print('move y - $i');
+      int j = (difPos[1] < 0 ? i * -1 : i);
+      grid.matrix[lstTailPos[0]][lstTailPos[1] + j] = 1;
+      lstNewTailPos = [
+        (i > 1 ? lstHeadPos[0] : lstTailPos[0]),
+        lstTailPos[1] + (i == 1 && planeChange ? 0 : j)
+      ];
+    }
 
     print('head at $lstHeadPos, tail at $lstNewTailPos');
-
-    grid.matrix[lstNewTailPos[0]][lstNewTailPos[1]] = 1;
-
     return lstNewTailPos;
   }
 
