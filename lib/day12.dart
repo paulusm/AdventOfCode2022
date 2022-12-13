@@ -2,6 +2,9 @@ import 'dart:io';
 import 'dart:mirrors';
 import 'package:matrices/matrices.dart';
 
+//Development paused due to lack of brain cells
+// CONTRIBUTE! Send me some brain cells pls
+
 class Day12 {
   Matrix grid = Matrix();
   List<int> home = [];
@@ -67,19 +70,19 @@ class Day12 {
           }
         }
       }
-      //print('Possible moves - $candidateMoves');
+      print('Possible moves - $candidateMoves');
       int bestScore = -10000;
       List<int> bestMove = [];
       for (List<int> move in candidateMoves) {
-        //print('Possible move - $move');
-        //print('height gain - ${getHeightGain(currentPos, move)}');
-        //print('distance to step up - ${distanceToNearestStepUp(move)}');
-        //print('distance to top - ${getDistance(top, currentPos)}');
-        int elScore = getHeightGain(currentPos, move) * 2 +
-            distanceToNearestStepUp(move) *
-                (distanceToNearestStepUp(move) == 100000 ? 1 : -1) +
-            getDistance(move, top) * -1;
-        //print('total value of position $elScore');
+        print('Possible move - $move');
+        print('height gain - ${getHeightGain(currentPos, move)}');
+        print('distance to step up - ${distanceToNearestStepUp(move)}');
+        print('distance to top - ${getDistance(top, currentPos)}');
+        int elScore = getHeightGain(currentPos, move); //* 2 +
+        //distanceToNearestStepUp(move) *
+        // (distanceToNearestStepUp(move) == 100000 ? 1 : -1) +
+        // getDistance(move, top) * -1;
+        print('total value of position $elScore');
         if (elScore > bestScore) {
           bestScore = elScore;
           bestMove = move;
@@ -94,7 +97,7 @@ class Day12 {
       }
       steps++;
 
-      if (steps > 40) break;
+      if (steps > 50) break;
     }
 
     return (steps);
