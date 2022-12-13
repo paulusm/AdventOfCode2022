@@ -8,8 +8,9 @@
 //import 'package:dart_advent/day08.dart' as day8;
 //import 'package:dart_advent/day09.dart' as day9;
 //import 'package:dart_advent/day10.dart' as day10;
-import 'package:dart_advent/day11.dart' as day11;
+//import 'package:dart_advent/day11.dart' as day11;
+import 'package:dart_advent/day12.dart' as day12;
 
 void main(List<String> arguments) {
-  day11.Day11();
+  day12.Day12();
 }

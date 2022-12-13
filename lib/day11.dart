@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'dart:collection';
 
+//Part 1 OK, part 2 off for some reason..
+
 class Day11 {
   LinkedHashMap monkeys = LinkedHashMap();
   int monkeyCount = 0;
