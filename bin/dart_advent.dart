@@ -14,9 +14,9 @@
 //import 'package:dart_advent/day14.dart' as day14;
 //import 'package:dart_advent/day15.dart' as day15;
 //import 'package:dart_advent/day16.dart' as day16;
-//import 'package:dart_advent/day17.dart' as day17;
-import 'package:dart_advent/day18.dart' as day18;
+import 'package:dart_advent/day17.dart' as day17;
+//import 'package:dart_advent/day18.dart' as day18;
 
 void main(List<String> arguments) {
-  day18.Day18();
+  day17.Day17();
 }
