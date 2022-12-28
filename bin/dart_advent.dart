@@ -16,8 +16,10 @@
 //import 'package:dart_advent/day16.dart' as day16;
 //import 'package:dart_advent/day17.dart' as day17;
 //import 'package:dart_advent/day18.dart' as day18;
-import 'package:dart_advent/day19.dart' as day19;
+//import 'package:dart_advent/day19.dart' as day19;
+//import 'package:dart_advent/day20.dart' as day20;
+import 'package:dart_advent/day25.dart' as day25;
 
 void main(List<String> arguments) {
-  day19.Day19();
+  day25.Day25();
 }
